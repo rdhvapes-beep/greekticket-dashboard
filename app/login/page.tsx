@@ -8,20 +8,36 @@ const supabase = createClient(
 );
 
 export default function LoginPage() {
-  const loginDiscord = async () => {
-    const origin = window.location.origin;
-
+  const loginWithDiscord = async () => {
     await supabase.auth.signInWithOAuth({
       provider: "discord",
       options: {
-        redirectTo: `${origin}/auth/callback`,
+        redirectTo: `${window.location.origin}/auth/callback`,
       },
     });
   };
 
   return (
-    <div style={{ padding: 24 }}>
-      <button onClick={loginDiscord}>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        gap: "16px",
+      }}
+    >
+      <h1>Login</h1>
+
+      <button
+        onClick={loginWithDiscord}
+        style={{
+          padding: "12px 20px",
+          fontSize: "16px",
+          cursor: "pointer",
+        }}
+      >
         Login with Discord
       </button>
     </div>
